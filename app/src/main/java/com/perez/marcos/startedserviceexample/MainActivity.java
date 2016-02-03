@@ -25,8 +25,6 @@ public class MainActivity extends AppCompatActivity {
         bStop = (Button) findViewById(R.id.buttonStop);
         final Context context = this;
 
-
-
         bStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -14,41 +14,20 @@ import android.widget.Toast;
 
 public class MyService extends Service {
 
-    Thread t;
-    Boolean started = false;
+
     public MyService() {
     }
 
 
-     @Override
+    @Override
     public void onCreate() {
-         Log.v("service","onCreate" );
+        Log.v("service", "onCreate");
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.v("service", "onStartCommand");
-        final long totalTime = 1000 * 60;
-        if (!started) {
-            t = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    started = true;
-                    long currentTime = 0;
-                    while (currentTime <= totalTime && started) {
-                        try {
-                            Toast.makeText(getApplicationContext(),"I'M ALIVE :D!", Toast.LENGTH_SHORT).show();
-                            Thread.sleep(3000);
-                            currentTime += 3000;
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            });
-            t.start();
-        }
-        return START_STICKY;
+        Log.v("service","onStartCommand");
+        return super.onStartCommand(intent, flags, startId);
     }
 
     @Override
@@ -58,12 +37,9 @@ public class MyService extends Service {
     }
 
 
-
     @Override
     public void onDestroy() {
         Log.v("service", "onDestroy");
-        started = false;
-        t.interrupt();
         stopSelf();
 
     }
